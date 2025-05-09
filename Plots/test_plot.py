@@ -45,3 +45,22 @@ plt.legend(title='Năm', bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+# Biểu đồ 4: Boxplot Thang Hạnh Phúc của một số quốc gia
+plt.figure(figsize=(10, 6))
+cac_quoc_gia = ['Australia', 'Afghanistan', 'Brazil', 'Vietnam']
+data_to_plot = [data[data['Country name'] == quoc_gia]['Life Ladder'] for quoc_gia in cac_quoc_gia]
+plt.boxplot(data_to_plot, labels=cac_quoc_gia)
+plt.title('Phân Phối Thang Hạnh Phúc của Một Số Quốc Gia (2006-2023)')
+plt.xlabel('Quốc Gia')
+plt.ylabel('Thang Hạnh Phúc')
+plt.grid(True)
+plt.show()
+# Biểu đồ 5: Đường xu hướng tuổi thọ khỏe mạnh trung bình theo năm
+plt.figure(figsize=(10, 6))
+mean_life_expectancy = [data[data['year'] == year]['Healthy life expectancy'].mean() for year in years]
+plt.plot(years, mean_life_expectancy, marker='o', color='green')
+plt.title('Tuổi Thọ Khỏe Mạnh Trung Bình Theo Năm (2006-2023)')
+plt.xlabel('Năm')
+plt.ylabel('Tuổi Thọ Khỏe Mạnh Trung Bình')
+plt.grid(True)
+plt.show()
