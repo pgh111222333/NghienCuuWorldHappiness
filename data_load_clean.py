@@ -1,28 +1,32 @@
 import pandas as pd
 
-# Đọc dữ liệu từ file CSV (đã có header)
-df = pd.read_csv('dataset/WorldHappiness.csv', encoding='ISO-8859-1')
+def load_data_cleaned():
+    input_path = 'dataset/WorldHappiness.csv'
+    output_path = 'dataset/WorldHappiness_clean.csv'
 
-#Thông tin file CSV ban đầu
-df.info()
+    # Đọc file gốc với encoding ISO-8859-1
+    df = pd.read_csv(input_path, encoding='ISO-8859-1')
 
-# Chuẩn hóa dữ liệu: loại bỏ khoảng trắng ở tên quốc gia
-df['Country name'] = df['Country name'].str.strip().str.title()
+    print("Thông tin ban đầu:")
+    df.info()
 
-# Chuyển kiểu dữ liệu cho các cột số (trừ cột tên quốc gia)
-for col in df.columns:
-    if col != 'Country name':
-        df[col] = pd.to_numeric(df[col], errors='coerce')
+    # Chuẩn hóa tên quốc gia
+    df['Country name'] = df['Country name'].str.strip().str.title()
 
-# Thống kê số lượng giá trị không thiếu cho từng cột
-print("Số lượng giá trị không thiếu cho từng cột:")
-print(df.count())
+    # Chuyển đổi dữ liệu các cột số
+    for col in df.columns:
+        if col != 'Country name':
+            df[col] = pd.to_numeric(df[col], errors='coerce')
 
-# Loại bỏ các hàng có giá trị thiếu
-df_clean = df.dropna(axis=0)
+    print("Số lượng giá trị không thiếu cho từng cột:")
+    print(df.count())
 
-# Thống kê số lượng hàng sau khi loại bỏ
-print(f"Số lượng hàng sau khi loại bỏ các hàng thiếu dữ liệu: {df_clean.shape[0]}")
+    # Xoá các hàng có dữ liệu thiếu
+    df_clean = df.dropna(how='any')
+    print(f"Số lượng hàng sau khi loại bỏ: {df_clean.shape[0]}")
 
-# Lưu lại file đã xử lý
-df_clean.to_csv('dataset/WorldHappiness_clean.csv', index=False)
+    # Lưu file với encoding utf-8-sig để không lỗi tiếng Việt
+    df_clean.to_csv(output_path, index=False, encoding='utf-8')
+    print(f"Đã lưu file sạch tại: {output_path}")
+
+    return df_clean
