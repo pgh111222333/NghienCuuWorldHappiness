@@ -1,7 +1,10 @@
 import pandas as pd
 
 # Đọc dữ liệu từ file CSV (đã có header)
-df = pd.read_csv('WorldHappiness.csv', encoding='ISO-8859-1')
+df = pd.read_csv('dataset/WorldHappiness.csv', encoding='ISO-8859-1')
+
+#Thông tin file CSV ban đầu
+df.info()
 
 # Chuẩn hóa dữ liệu: loại bỏ khoảng trắng ở tên quốc gia
 df['Country name'] = df['Country name'].str.strip().str.title()
@@ -22,4 +25,4 @@ df_clean = df.dropna(axis=0)
 print(f"Số lượng hàng sau khi loại bỏ các hàng thiếu dữ liệu: {df_clean.shape[0]}")
 
 # Lưu lại file đã xử lý
-df_clean.to_csv('WorldHappiness_clean.csv', index=False)
+df_clean.to_csv('dataset/WorldHappiness_clean.csv', index=False)
