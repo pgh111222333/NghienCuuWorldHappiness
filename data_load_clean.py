@@ -1,6 +1,8 @@
 import pandas as pd
 
 def load_data_cleaned():
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.max_rows', None)
     input_path = 'dataset/WorldHappiness.csv'
     output_path = 'dataset/WorldHappiness_clean.csv'
 
@@ -28,5 +30,9 @@ def load_data_cleaned():
     # Lưu file với encoding utf-8-sig để không lỗi tiếng Việt
     df_clean.to_csv(output_path, index=False, encoding='utf-8')
     print(f"Đã lưu file sạch tại: {output_path}")
-
+    df = df.sort_values(['Country name', 'year'])
     return df_clean
+
+
+    
+#load_data_cleaned()
