@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from utilities.CRUD import Add_Data
 from utilities.CRUD import Edit_Data
+from data.data_processor import load_data_cleaned
 from data.data_processor import load_data
 from data.data_processor import search_data
 from data.data_processor import del_data
@@ -35,7 +36,9 @@ def del_confirm():
     inp_data = {columns[i]: values[i] for i in range(len(columns))}
 
     del_data(inp_data)
+#Load và lọc dữ liệu vào file CSV _Cleaned
 
+    
 # Hàm xác nhận sửa dữ liệu
 def edit_confirm():
     selected_row = view.selection()
@@ -135,11 +138,14 @@ def create_gui(root):
 
     reload_btn = ttk.Button(root, text="Reload lại trang dữ liệu", command=reload_data)
     reload_btn.grid(row=3, column=1, padx=5, pady=5)
-
+    
     add_col_btn = ttk.Button(root, text="Thêm cột deltal_happiness", command=add_delta_happiness)
-    add_col_btn.grid(row=5,column=1)
-    show_plots_btn = tk.Button(root, text="Trình diễn các biểu đồ", command=open_plot_window)
-    show_plots_btn.grid(row=6,column=1)
+    load_cleaned_btn =ttk.Button(root,text="Lọc và load dữ liệu vào file Cleaned",command=load_data_cleaned)
+    load_cleaned_btn.grid(row=4,column=1,pady=5)
+    add_col_btn = ttk.Button(root, text="Thêm cột deltal_happiness", command=add_delta_happiness)
+    add_col_btn.grid(row=5,column=1,pady=5)
+    show_plots_btn = ttk.Button(root, text="Trình diễn các biểu đồ", command=open_plot_window)
+    show_plots_btn.grid(row=6,column=1, pady=5)
 
     # Frame cho các nút phân trang
     pagination_frame = ttk.Frame(root)
@@ -160,8 +166,6 @@ def create_gui(root):
 
     # Tải dữ liệu 
     load_page()
-
-
 
     root.mainloop()    
 def open_plot_window():

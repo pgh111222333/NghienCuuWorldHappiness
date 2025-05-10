@@ -2,7 +2,7 @@ import pandas as pd
 from tkinter import messagebox
 
 # Đường dẫn tới file CSV chứa dữ liệu
-file_path = "data/WorldHappiness.csv"
+file_path = "data/WorldHappiness_Cleaned.csv"
 def load_data_cleaned():
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
