@@ -83,7 +83,7 @@ def show_plots_on_new_window(parent):
     canvas4 = FigureCanvasTkAgg(fig4, master=frame4)
     canvas4.draw()
     canvas4.get_tk_widget().pack(fill='both', expand=True)
-
+    
     # --- Plot 5 ---
     frame5 = ttk.Frame(notebook)
     notebook.add(frame5, text="Biểu đồ 5")
